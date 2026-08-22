@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as T1IndexRouteImport } from './routes/t1.index'
+import { Route as T1BriefingRouteImport } from './routes/t1.briefing'
 import { Route as T1Bt19RouteImport } from './routes/t1.bt19'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +24,11 @@ const T1IndexRoute = T1IndexRouteImport.update({
   path: '/t1/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const T1BriefingRoute = T1BriefingRouteImport.update({
+  id: '/t1/briefing',
+  path: '/t1/briefing',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const T1Bt19Route = T1Bt19RouteImport.update({
   id: '/t1/bt19',
   path: '/t1/bt19',
@@ -31,30 +37,34 @@ const T1Bt19Route = T1Bt19RouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/t1/briefing': typeof T1BriefingRoute
   '/t1/bt19': typeof T1Bt19Route
   '/t1/': typeof T1IndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/t1/briefing': typeof T1BriefingRoute
   '/t1/bt19': typeof T1Bt19Route
   '/t1': typeof T1IndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/t1/briefing': typeof T1BriefingRoute
   '/t1/bt19': typeof T1Bt19Route
   '/t1/': typeof T1IndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/t1/bt19' | '/t1/'
+  fullPaths: '/' | '/t1/briefing' | '/t1/bt19' | '/t1/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/t1/bt19' | '/t1'
-  id: '__root__' | '/' | '/t1/bt19' | '/t1/'
+  to: '/' | '/t1/briefing' | '/t1/bt19' | '/t1'
+  id: '__root__' | '/' | '/t1/briefing' | '/t1/bt19' | '/t1/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  T1BriefingRoute: typeof T1BriefingRoute
   T1Bt19Route: typeof T1Bt19Route
   T1IndexRoute: typeof T1IndexRoute
 }
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof T1IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/t1/briefing': {
+      id: '/t1/briefing'
+      path: '/t1/briefing'
+      fullPath: '/t1/briefing'
+      preLoaderRoute: typeof T1BriefingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/t1/bt19': {
       id: '/t1/bt19'
       path: '/t1/bt19'
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  T1BriefingRoute: T1BriefingRoute,
   T1Bt19Route: T1Bt19Route,
   T1IndexRoute: T1IndexRoute,
 }
