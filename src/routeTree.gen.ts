@@ -10,14 +10,30 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuditRouteImport } from './routes/audit'
 import { Route as T1IndexRouteImport } from './routes/t1.index'
 import { Route as T1BriefingRouteImport } from './routes/t1.briefing'
 import { Route as T1Bt19RouteImport } from './routes/t1.bt19'
 import { Route as T1OwnerRouteImport } from './routes/t1.owner'
+import { Route as T2IndexRouteImport } from './routes/t2.index'
+import { Route as T2ConflictsRouteImport } from './routes/t2.conflicts'
+import { Route as T2IccRouteImport } from './routes/t2.icc'
+import { Route as T2SpadeRouteImport } from './routes/t2.spade'
+import { Route as T3IndexRouteImport } from './routes/t3.index'
+import { Route as T3EosrRouteImport } from './routes/t3.eosr'
+import { Route as T3HandoverRouteImport } from './routes/t3.handover'
+import { Route as T4IndexRouteImport } from './routes/t4.index'
+import { Route as T4AlertsRouteImport } from './routes/t4.alerts'
+import { Route as T4ReportRouteImport } from './routes/t4.report'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuditRoute = AuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
   getParentRoute: () => rootRouteImport,
 } as any)
 const T1IndexRoute = T1IndexRouteImport.update({
@@ -40,43 +56,186 @@ const T1OwnerRoute = T1OwnerRouteImport.update({
   path: '/t1/owner',
   getParentRoute: () => rootRouteImport,
 } as any)
+const T2IndexRoute = T2IndexRouteImport.update({
+  id: '/t2/',
+  path: '/t2/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const T2ConflictsRoute = T2ConflictsRouteImport.update({
+  id: '/t2/conflicts',
+  path: '/t2/conflicts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const T2IccRoute = T2IccRouteImport.update({
+  id: '/t2/icc',
+  path: '/t2/icc',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const T2SpadeRoute = T2SpadeRouteImport.update({
+  id: '/t2/spade',
+  path: '/t2/spade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const T3IndexRoute = T3IndexRouteImport.update({
+  id: '/t3/',
+  path: '/t3/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const T3EosrRoute = T3EosrRouteImport.update({
+  id: '/t3/eosr',
+  path: '/t3/eosr',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const T3HandoverRoute = T3HandoverRouteImport.update({
+  id: '/t3/handover',
+  path: '/t3/handover',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const T4IndexRoute = T4IndexRouteImport.update({
+  id: '/t4/',
+  path: '/t4/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const T4AlertsRoute = T4AlertsRouteImport.update({
+  id: '/t4/alerts',
+  path: '/t4/alerts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const T4ReportRoute = T4ReportRouteImport.update({
+  id: '/t4/report',
+  path: '/t4/report',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/audit': typeof AuditRoute
   '/t1/briefing': typeof T1BriefingRoute
   '/t1/bt19': typeof T1Bt19Route
   '/t1/owner': typeof T1OwnerRoute
+  '/t2/conflicts': typeof T2ConflictsRoute
+  '/t2/icc': typeof T2IccRoute
+  '/t2/spade': typeof T2SpadeRoute
+  '/t3/eosr': typeof T3EosrRoute
+  '/t3/handover': typeof T3HandoverRoute
+  '/t4/alerts': typeof T4AlertsRoute
+  '/t4/report': typeof T4ReportRoute
   '/t1/': typeof T1IndexRoute
+  '/t2/': typeof T2IndexRoute
+  '/t3/': typeof T3IndexRoute
+  '/t4/': typeof T4IndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/audit': typeof AuditRoute
   '/t1/briefing': typeof T1BriefingRoute
   '/t1/bt19': typeof T1Bt19Route
   '/t1/owner': typeof T1OwnerRoute
+  '/t2/conflicts': typeof T2ConflictsRoute
+  '/t2/icc': typeof T2IccRoute
+  '/t2/spade': typeof T2SpadeRoute
+  '/t3/eosr': typeof T3EosrRoute
+  '/t3/handover': typeof T3HandoverRoute
+  '/t4/alerts': typeof T4AlertsRoute
+  '/t4/report': typeof T4ReportRoute
   '/t1': typeof T1IndexRoute
+  '/t2': typeof T2IndexRoute
+  '/t3': typeof T3IndexRoute
+  '/t4': typeof T4IndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/audit': typeof AuditRoute
   '/t1/briefing': typeof T1BriefingRoute
   '/t1/bt19': typeof T1Bt19Route
   '/t1/owner': typeof T1OwnerRoute
+  '/t2/conflicts': typeof T2ConflictsRoute
+  '/t2/icc': typeof T2IccRoute
+  '/t2/spade': typeof T2SpadeRoute
+  '/t3/eosr': typeof T3EosrRoute
+  '/t3/handover': typeof T3HandoverRoute
+  '/t4/alerts': typeof T4AlertsRoute
+  '/t4/report': typeof T4ReportRoute
   '/t1/': typeof T1IndexRoute
+  '/t2/': typeof T2IndexRoute
+  '/t3/': typeof T3IndexRoute
+  '/t4/': typeof T4IndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/t1/briefing' | '/t1/bt19' | '/t1/owner' | '/t1/'
+  fullPaths:
+    | '/'
+    | '/audit'
+    | '/t1/briefing'
+    | '/t1/bt19'
+    | '/t1/owner'
+    | '/t2/conflicts'
+    | '/t2/icc'
+    | '/t2/spade'
+    | '/t3/eosr'
+    | '/t3/handover'
+    | '/t4/alerts'
+    | '/t4/report'
+    | '/t1/'
+    | '/t2/'
+    | '/t3/'
+    | '/t4/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/t1/briefing' | '/t1/bt19' | '/t1/owner' | '/t1'
-  id: '__root__' | '/' | '/t1/briefing' | '/t1/bt19' | '/t1/owner' | '/t1/'
+  to:
+    | '/'
+    | '/audit'
+    | '/t1/briefing'
+    | '/t1/bt19'
+    | '/t1/owner'
+    | '/t2/conflicts'
+    | '/t2/icc'
+    | '/t2/spade'
+    | '/t3/eosr'
+    | '/t3/handover'
+    | '/t4/alerts'
+    | '/t4/report'
+    | '/t1'
+    | '/t2'
+    | '/t3'
+    | '/t4'
+  id:
+    | '__root__'
+    | '/'
+    | '/audit'
+    | '/t1/briefing'
+    | '/t1/bt19'
+    | '/t1/owner'
+    | '/t2/conflicts'
+    | '/t2/icc'
+    | '/t2/spade'
+    | '/t3/eosr'
+    | '/t3/handover'
+    | '/t4/alerts'
+    | '/t4/report'
+    | '/t1/'
+    | '/t2/'
+    | '/t3/'
+    | '/t4/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuditRoute: typeof AuditRoute
   T1BriefingRoute: typeof T1BriefingRoute
   T1Bt19Route: typeof T1Bt19Route
   T1OwnerRoute: typeof T1OwnerRoute
+  T2ConflictsRoute: typeof T2ConflictsRoute
+  T2IccRoute: typeof T2IccRoute
+  T2SpadeRoute: typeof T2SpadeRoute
+  T3EosrRoute: typeof T3EosrRoute
+  T3HandoverRoute: typeof T3HandoverRoute
+  T4AlertsRoute: typeof T4AlertsRoute
+  T4ReportRoute: typeof T4ReportRoute
   T1IndexRoute: typeof T1IndexRoute
+  T2IndexRoute: typeof T2IndexRoute
+  T3IndexRoute: typeof T3IndexRoute
+  T4IndexRoute: typeof T4IndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -86,6 +245,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/audit': {
+      id: '/audit'
+      path: '/audit'
+      fullPath: '/audit'
+      preLoaderRoute: typeof AuditRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/t1/': {
@@ -116,15 +282,96 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof T1OwnerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/t2/': {
+      id: '/t2/'
+      path: '/t2'
+      fullPath: '/t2/'
+      preLoaderRoute: typeof T2IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/t2/conflicts': {
+      id: '/t2/conflicts'
+      path: '/t2/conflicts'
+      fullPath: '/t2/conflicts'
+      preLoaderRoute: typeof T2ConflictsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/t2/icc': {
+      id: '/t2/icc'
+      path: '/t2/icc'
+      fullPath: '/t2/icc'
+      preLoaderRoute: typeof T2IccRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/t2/spade': {
+      id: '/t2/spade'
+      path: '/t2/spade'
+      fullPath: '/t2/spade'
+      preLoaderRoute: typeof T2SpadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/t3/': {
+      id: '/t3/'
+      path: '/t3'
+      fullPath: '/t3/'
+      preLoaderRoute: typeof T3IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/t3/eosr': {
+      id: '/t3/eosr'
+      path: '/t3/eosr'
+      fullPath: '/t3/eosr'
+      preLoaderRoute: typeof T3EosrRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/t3/handover': {
+      id: '/t3/handover'
+      path: '/t3/handover'
+      fullPath: '/t3/handover'
+      preLoaderRoute: typeof T3HandoverRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/t4/': {
+      id: '/t4/'
+      path: '/t4'
+      fullPath: '/t4/'
+      preLoaderRoute: typeof T4IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/t4/alerts': {
+      id: '/t4/alerts'
+      path: '/t4/alerts'
+      fullPath: '/t4/alerts'
+      preLoaderRoute: typeof T4AlertsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/t4/report': {
+      id: '/t4/report'
+      path: '/t4/report'
+      fullPath: '/t4/report'
+      preLoaderRoute: typeof T4ReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuditRoute: AuditRoute,
   T1BriefingRoute: T1BriefingRoute,
   T1Bt19Route: T1Bt19Route,
   T1OwnerRoute: T1OwnerRoute,
+  T2ConflictsRoute: T2ConflictsRoute,
+  T2IccRoute: T2IccRoute,
+  T2SpadeRoute: T2SpadeRoute,
+  T3EosrRoute: T3EosrRoute,
+  T3HandoverRoute: T3HandoverRoute,
+  T4AlertsRoute: T4AlertsRoute,
+  T4ReportRoute: T4ReportRoute,
   T1IndexRoute: T1IndexRoute,
+  T2IndexRoute: T2IndexRoute,
+  T3IndexRoute: T3IndexRoute,
+  T4IndexRoute: T4IndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

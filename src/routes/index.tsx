@@ -8,6 +8,9 @@ import {
   Trophy,
   ArrowUpRight,
   Activity,
+  TrendingUp,
+  TrendingDown,
+  Minus,
 } from "lucide-react";
 import { AppShell } from "@/components/iosp/AppShell";
 import { StatusPill, ConfidenceBadge } from "@/components/iosp/primitives";
@@ -34,11 +37,18 @@ export const Route = createFileRoute("/")({
 });
 
 const TILES = [
-  { to: "/t1", icon: ShieldAlert, code: "T1", ...KPI.t1 },
-  { to: "/t1", icon: Lock, code: "T2", ...KPI.t2 },
-  { to: "/t1", icon: ClipboardList, code: "T3", ...KPI.t3 },
-  { to: "/t1", icon: Trophy, code: "T4", ...KPI.t4 },
+  { to: "/t1" as const, icon: ShieldAlert, code: "T1", ...KPI.t1 },
+  { to: "/t2" as const, icon: Lock, code: "T2", ...KPI.t2 },
+  { to: "/t3" as const, icon: ClipboardList, code: "T3", ...KPI.t3 },
+  { to: "/t4" as const, icon: Trophy, code: "T4", ...KPI.t4 },
 ];
+
+function TrendIcon({ trend }: { trend: string }) {
+  const val = parseFloat(trend);
+  if (val > 0) return <TrendingUp className="size-3.5 text-intact" aria-hidden />;
+  if (val < 0) return <TrendingDown className="size-3.5 text-absent" aria-hidden />;
+  return <Minus className="size-3.5 text-unassessed" aria-hidden />;
+}
 
 function CommandCenter() {
   useEffect(() => {
@@ -80,9 +90,12 @@ function CommandCenter() {
           </div>
         </div>
 
+        {/* KPI tiles — each links to its correct module */}
         <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {TILES.map((t) => {
             const Icon = t.icon;
+            const trendVal = parseFloat(t.trend);
+            const trendColor = trendVal > 0 ? "text-intact" : trendVal < 0 ? "text-absent" : "text-unassessed";
             return (
               <Link
                 key={t.code}
@@ -98,9 +111,13 @@ function CommandCenter() {
                 </div>
                 <p className="mt-3 font-mono text-3xl tabular">{t.value}</p>
                 <p className="text-xs text-muted-foreground">{t.unit}</p>
-                <p className="mt-3 border-t border-border pt-2 text-xs text-muted-foreground">
-                  {t.sub}
-                </p>
+                <div className="mt-3 flex items-center justify-between border-t border-border pt-2">
+                  <p className="text-xs text-muted-foreground">{t.sub}</p>
+                  <span className={`inline-flex items-center gap-1 font-mono text-[11px] ${trendColor}`}>
+                    <TrendIcon trend={t.trend} />
+                    {t.trend}
+                  </span>
+                </div>
               </Link>
             );
           })}
@@ -120,11 +137,24 @@ function CommandCenter() {
                   key={bt.id}
                   to={bt.id === "BT-19" ? "/t1/bt19" : "/t1"}
                   className="rounded-xl border border-border bg-surface-2 p-3 transition hover:border-primary/50"
+                  title={bt.id !== "BT-19" ? "Full drill-down available for BT-19 in this demo" : undefined}
                 >
-                  <p className="font-mono text-sm">{bt.id}</p>
+                  <div className="flex items-start justify-between gap-1">
+                    <p className="font-mono text-sm">{bt.id}</p>
+                    {bt.id !== "BT-19" && (
+                      <span className="shrink-0 rounded bg-surface-2 px-1 py-0.5 font-mono text-[9px] text-muted-foreground/60 ring-1 ring-border">
+                        BT-19 hero
+                      </span>
+                    )}
+                  </div>
                   <p className="truncate text-xs text-muted-foreground">{bt.name}</p>
                   <div className="mt-2">
                     <StatusPill state={bt.health} />
+                  </div>
+                  <div className="mt-2 flex gap-1 font-mono text-[10px] text-muted-foreground">
+                    <span className="text-intact">{bt.intact}I</span>
+                    <span className="text-degraded">{bt.degraded}D</span>
+                    {bt.absent > 0 && <span className="text-absent">{bt.absent}A</span>}
                   </div>
                 </Link>
               ))}
