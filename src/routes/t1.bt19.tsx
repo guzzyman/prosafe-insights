@@ -322,7 +322,7 @@ function Bt19Dashboard() {
                   <div className="mt-2">
                     <CitationChip
                       citation={{
-                        system: selected.source.split(" · ")[0],
+                        system: selected.source.split(" · ")[0] ?? selected.source,
                         ref: selected.source.split(" · ")[1] ?? "—",
                         age: "updated today",
                       }}
