@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as T1IndexRouteImport } from './routes/t1.index'
 import { Route as T1BriefingRouteImport } from './routes/t1.briefing'
 import { Route as T1Bt19RouteImport } from './routes/t1.bt19'
+import { Route as T1OwnerRouteImport } from './routes/t1.owner'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,17 +35,24 @@ const T1Bt19Route = T1Bt19RouteImport.update({
   path: '/t1/bt19',
   getParentRoute: () => rootRouteImport,
 } as any)
+const T1OwnerRoute = T1OwnerRouteImport.update({
+  id: '/t1/owner',
+  path: '/t1/owner',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/t1/briefing': typeof T1BriefingRoute
   '/t1/bt19': typeof T1Bt19Route
+  '/t1/owner': typeof T1OwnerRoute
   '/t1/': typeof T1IndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/t1/briefing': typeof T1BriefingRoute
   '/t1/bt19': typeof T1Bt19Route
+  '/t1/owner': typeof T1OwnerRoute
   '/t1': typeof T1IndexRoute
 }
 export interface FileRoutesById {
@@ -52,20 +60,22 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/t1/briefing': typeof T1BriefingRoute
   '/t1/bt19': typeof T1Bt19Route
+  '/t1/owner': typeof T1OwnerRoute
   '/t1/': typeof T1IndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/t1/briefing' | '/t1/bt19' | '/t1/'
+  fullPaths: '/' | '/t1/briefing' | '/t1/bt19' | '/t1/owner' | '/t1/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/t1/briefing' | '/t1/bt19' | '/t1'
-  id: '__root__' | '/' | '/t1/briefing' | '/t1/bt19' | '/t1/'
+  to: '/' | '/t1/briefing' | '/t1/bt19' | '/t1/owner' | '/t1'
+  id: '__root__' | '/' | '/t1/briefing' | '/t1/bt19' | '/t1/owner' | '/t1/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   T1BriefingRoute: typeof T1BriefingRoute
   T1Bt19Route: typeof T1Bt19Route
+  T1OwnerRoute: typeof T1OwnerRoute
   T1IndexRoute: typeof T1IndexRoute
 }
 
@@ -99,6 +109,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof T1Bt19RouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/t1/owner': {
+      id: '/t1/owner'
+      path: '/t1/owner'
+      fullPath: '/t1/owner'
+      preLoaderRoute: typeof T1OwnerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -106,6 +123,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   T1BriefingRoute: T1BriefingRoute,
   T1Bt19Route: T1Bt19Route,
+  T1OwnerRoute: T1OwnerRoute,
   T1IndexRoute: T1IndexRoute,
 }
 export const routeTree = rootRouteImport
