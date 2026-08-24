@@ -1,8 +1,8 @@
 # Prosafe Insights
 
-Lovable Build Prompt — NLNG IOSP Suite (Interactive Demo / Mock)
+Build Prompt — NLNG IOSP Suite (Interactive Demo / Mock)
 
-How to use this file. Paste the block below (everything under "═══ PROMPT START ═══") into Lovable as your initial build prompt. It is written to produce a polished, clickable, front-end-only demo of the Prosafe Intelligent Operations & Safety Platform for Nigeria LNG — with realistic mock data and simulated AI, suitable for showing NLNG stakeholders and your own team. After the first generation, use the follow-up prompts at the bottom to build out each remaining screen one at a time (Lovable does better with incremental scope than one giant generation).
+How to use this file. Paste the block below (everything under "═══ PROMPT START ═══") into your AI builder as the initial build prompt. It is written to produce a polished, clickable, front-end-only demo of the Prosafe Intelligent Operations & Safety Platform for Nigeria LNG — with realistic mock data and simulated AI, suitable for showing NLNG stakeholders and your own team. After the first generation, use the follow-up prompts at the bottom to build out each remaining screen one at a time — incremental scope beats one giant generation.
 
 Important framing for the tool: this is a demo with mock/simulated data — no real backend, no real NLNG data, no external API keys. All "AI" responses are pre-scripted or template-generated on the client so the demo is instant, reliable, and offline. Keep it that way.
 
@@ -160,17 +160,7 @@ The three "mic-drop" moments to demo live: (1) the threat-line-14 drill-down (op
 
 All names, IDs, and figures are fictional but structurally faithful to the real NLNG frameworks (BT-19, the SCE tags, the STP dimensions, the isolation registers). Keep them fictional in any external showing.
 
-If Lovable struggles with one big screen, split it: build the table first, then the drill-down drawer, then the AI panel. Incremental beats monolithic.
-
-This project was built with [Lovable](https://lovable.dev).
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/533550e8-65e5-4db6-819c-76e1c3cab351).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+If the builder struggles with one big screen, split it: build the table first, then the drill-down drawer, then the AI panel. Incremental beats monolithic.
 
 ## Development
 

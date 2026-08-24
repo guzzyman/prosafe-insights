@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
   ShieldAlert,
@@ -217,6 +217,20 @@ export function AppShell({ children }: { children: ReactNode }) {
     }
   }, [dark]);
 
+  // The header wraps at narrow widths, so its height is published as a CSS var
+  // for anything that has to sit clear of it (toasts are fixed-position).
+  const headerRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+    const observer = new ResizeObserver(() => {
+      // offsetHeight, not contentRect — the header has a bottom border.
+      document.documentElement.style.setProperty("--app-header-h", `${header.offsetHeight}px`);
+    });
+    observer.observe(header);
+    return () => observer.disconnect();
+  }, []);
+
   // Close mobile sidebar on route change
   useEffect(() => {
     setMobileOpen(false);
@@ -244,7 +258,10 @@ export function AppShell({ children }: { children: ReactNode }) {
       )}
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur">
+        <header
+          ref={headerRef}
+          className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur"
+        >
           <div className="flex flex-wrap items-center gap-3 px-4 py-3">
             {/* Hamburger — mobile only */}
             <button
