@@ -126,7 +126,7 @@ function CommandCenter() {
         <section className="grid gap-4 lg:grid-cols-3">
           <div className="panel p-4 lg:col-span-2">
             <div className="mb-3 flex items-center justify-between">
-              <h2 className="text-sm font-semibold">Major Hazard Status</h2>
+              <h2 className="text-sm font-semibold">BowTie Barrier Status</h2>
               <span className="inline-flex items-center gap-2 font-mono text-[11px] text-muted-foreground">
                 <span className="live-dot size-1.5 rounded-full bg-intact" /> LIVE
               </span>

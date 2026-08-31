@@ -16,7 +16,7 @@ const MODULE_COLORS: Record<string, string> = {
   T2: "bg-primary/10 text-primary ring-primary/30",
   T3: "bg-degraded/10 text-degraded ring-degraded/30",
   T4: "bg-unassessed/10 text-unassessed ring-unassessed/30",
-  "Ask IOSP": "bg-primary/10 text-primary ring-primary/30",
+  "ProSafe Intelligence": "bg-primary/10 text-primary ring-primary/30",
   System: "bg-muted/60 text-muted-foreground ring-border",
 };
 
@@ -39,7 +39,7 @@ const ACTION_TYPE_STYLE: Record<string, string> = {
   Escalation: "bg-degraded/8 text-degraded",
 };
 
-const MODULES = ["All", "T1", "T2", "T3", "T4", "Ask IOSP", "System"] as const;
+const MODULES = ["All", "T1", "T2", "T3", "T4", "ProSafe Intelligence", "System"] as const;
 const ACTION_TYPES = [
   "All",
   "Classification",

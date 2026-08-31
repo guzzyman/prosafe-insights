@@ -15,7 +15,8 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { PLANT_UNITS, CURRENT_USER, ROTATION } from "@/lib/mockData";
-import { AskIosp } from "./AskIosp";
+import { ProSafeSearchBar } from "./ProSafeSearchBar";
+import { FloatingChat } from "./FloatingChat";
 
 const NAV = [
   {
@@ -24,7 +25,7 @@ const NAV = [
     icon: ShieldAlert,
     to: "/t1",
     children: [
-      { to: "/t1", label: "Major Hazard Status Board" },
+      { to: "/t1", label: "BowTie Barrier Status Board" },
       { to: "/t1/bt19", label: "BT-19 Barrier Dashboard" },
       { to: "/t1/briefing", label: "Daily Barrier Briefing" },
       { to: "/t1/owner", label: "Barrier Owner Portal" },
@@ -293,7 +294,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             </span>
 
             <div className="order-last min-w-[200px] flex-1 md:order-none">
-              <AskIosp compact />
+              <ProSafeSearchBar compact />
             </div>
 
             <button
@@ -330,6 +331,8 @@ export function AppShell({ children }: { children: ReactNode }) {
           Demo build · simulated data · not connected to live systems.
         </footer>
       </div>
+
+      <FloatingChat />
     </div>
   );
 }

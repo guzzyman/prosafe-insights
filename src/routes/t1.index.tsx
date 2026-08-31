@@ -6,13 +6,13 @@ import { BOW_TIES } from "@/lib/mockData";
 export const Route = createFileRoute("/t1/")({
   head: () => ({
     meta: [
-      { title: "Major Hazard Status Board — Prosafe IOSP" },
+      { title: "BowTie Barrier Status Board — Prosafe IOSP" },
       {
         name: "description",
         content:
           "Control-room status board showing live safety-barrier health across every major-hazard bow-tie in the LNG plant.",
       },
-      { property: "og:title", content: "Major Hazard Status Board — Prosafe IOSP" },
+      { property: "og:title", content: "BowTie Barrier Status Board — Prosafe IOSP" },
       {
         property: "og:description",
         content: "Glanceable barrier health per bow-tie, colour and label coded, for CCR display.",
@@ -27,7 +27,7 @@ function StatusBoard() {
     <AppShell>
       <div className="mx-auto max-w-[1400px]">
         <SectionHeading
-          title="Major Hazard Status Board"
+          title="BowTie Barrier Status Board"
           subtitle="Barrier health per bow-tie · CCR display mode · refreshed every 60 s"
           right={
             <span className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface-2 px-3 py-1.5 font-mono text-[11px] text-muted-foreground">

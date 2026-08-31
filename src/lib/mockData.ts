@@ -526,11 +526,69 @@ export const ASK_ANSWERS: AskAnswer[] = [
       { label: "Team B", value: "742 / 1000 · rank 4 · PTW Effectiveness 41/100" },
     ],
   },
+  {
+    q: "Why are SCEs showing Degraded right now?",
+    answer:
+      "12 SCEs across BT-19 are Degraded. The most common driver is certification or inspection lapse rather than a failed test — e.g. 44RV-771B is Degraded because its inspection certificate expired and a work order has been raised, not because a proof test failed. Degraded means reduced confidence in the barrier's independence or timeliness, not that it's non-functional.",
+    confidence: "High",
+    citations: [
+      { system: "SAP PM", ref: "WO auto-raised on cert expiry", age: "updated 12m ago" },
+      { system: "Omnisafe", ref: "BT-19 SCE register", age: "updated 4h ago" },
+    ],
+    evidence: [
+      { label: "44RV-771B", value: "Inspection & Certification — certificate expired, WO raised" },
+      { label: "Degraded ≠ failed", value: "Barrier still physically present; assurance evidence is stale or pending" },
+    ],
+  },
+  {
+    q: "What's overdue on my barrier owner portal?",
+    answer:
+      "Two SCAs are overdue: 44RV-771B (Inspection & Certification, 81 days overdue) and 244RV-004B (RBI, 34 days overdue). One acceptance form, AF-BT19-014 (threat line 14 deviation), has not yet been raised — that's the same gap behind the BT-19 Absent barrier alert.",
+    confidence: "High",
+    citations: [
+      { system: "Barrier Owner Portal", ref: "SCA due list", age: "live" },
+      { system: "Acceptance Forms", ref: "AF-BT19-014 / -771B", age: "live" },
+    ],
+    evidence: [
+      { label: "44RV-771B", value: "Inspection & Certification — overdue 81 d" },
+      { label: "244RV-004B", value: "RBI — overdue 34 d" },
+      { label: "AF-BT19-014", value: "Threat line 14 deviation — not raised" },
+    ],
+  },
+  {
+    q: "What is BT-19 and how many SCEs does it cover?",
+    answer:
+      "BT-19 is the Fuel Gas System bow-tie on Train 2 — 109 threat lines and 124 Safety Critical Elements across 14 human-barrier categories. Right now 108 SCEs are Intact, 12 Degraded, 2 Absent and 2 Unassessed, giving 96.8% barrier visibility (SCEs assessed) for this bow-tie this cycle.",
+    confidence: "High",
+    citations: [
+      { system: "Omnisafe", ref: "BT-19 bow-tie register", age: "updated 4h ago" },
+      { system: "Barrier Register", ref: "BT-19 SCE count", age: "static" },
+    ],
+    evidence: [
+      { label: "Threat lines", value: "109" },
+      { label: "SCE count", value: "124 across 14 human-barrier categories" },
+      { label: "Status split", value: "108 Intact · 12 Degraded · 2 Absent · 2 Unassessed" },
+    ],
+  },
 ];
 
 export const BRIEFING_ITEMS = SCES.filter(
   (s) => s.state === "Degraded" || s.state === "Absent",
 );
+
+// ─── ProSafe Intelligence chat ───────────────────────────────────────────────
+// Suggestion chips shown by default in the chat — T1 Barrier Visibility is the
+// demo's headline scope, but the underlying matcher runs over all of
+// ASK_ANSWERS, so questions from other modules resolve too (one assistant,
+// one knowledge base — see aiSimulator.askProSafe).
+
+export const T1_CHAT_SUGGESTIONS = [
+  "Which BT-19 barriers are currently Absent?",
+  "Are threats 14 and 15's remedial actions closed?",
+  "Why are SCEs showing Degraded right now?",
+  "What's overdue on my barrier owner portal?",
+  "What is BT-19 and how many SCEs does it cover?",
+];
 
 // ─── T2: LOTO Assurance ──────────────────────────────────────────────────────
 
@@ -1066,7 +1124,7 @@ export const CYCLE_REPORT: {
 export interface AuditEntry {
   id: string;
   timestamp: string;
-  module: "T1" | "T2" | "T3" | "T4" | "System" | "Ask IOSP";
+  module: "T1" | "T2" | "T3" | "T4" | "System" | "ProSafe Intelligence";
   actionType: "Classification" | "Draft" | "Query" | "Briefing" | "Alert" | "Gate check" | "Routing" | "Review request" | "Escalation";
   description: string;
   sourceSystems: string[];
@@ -1086,11 +1144,11 @@ export const AUDIT_TRAIL: AuditEntry[] = [
   { id: "AU-008", timestamp: "07:12", module: "T1", actionType: "Classification", description: "44RV-002B could not be classified — no Performance Standard linkage in SAP PM — queued for barrier-owner review", sourceSystems: ["SAP PM"], confidence: "Low", user: "System", outcome: "Queued for review" },
   { id: "AU-009", timestamp: "06:55", module: "T4", actionType: "Alert", description: "Within-cycle alert generated — Team B PTW gas-test compliance 32%, correction window 4 days", sourceSystems: ["STP Register", "PTW System"], confidence: "High", user: "System", outcome: "Completed" },
   { id: "AU-010", timestamp: "06:48", module: "T2", actionType: "Gate check", description: "Cross-ICC conflict detected — valve 44-XV-118 shared between ICC-2026-0423 and ICC-2026-0431; ICC-2026-0431 suspended", sourceSystems: ["Isolation Register"], confidence: "High", user: "System", outcome: "Blocked" },
-  { id: "AU-011", timestamp: "06:40", module: "Ask IOSP", actionType: "Query", description: "Query: 'Which BT-19 barriers are currently Absent?' — answered with 2 citations, High confidence", sourceSystems: ["Omnisafe", "SAP PM"], confidence: "High", user: "A. Bello", outcome: "Completed" },
+  { id: "AU-011", timestamp: "06:40", module: "ProSafe Intelligence", actionType: "Query", description: "Query: 'Which BT-19 barriers are currently Absent?' — answered with 2 citations, High confidence", sourceSystems: ["Omnisafe", "SAP PM"], confidence: "High", user: "A. Bello", outcome: "Completed" },
   { id: "AU-012", timestamp: "06:32", module: "T1", actionType: "Escalation", description: "Escalation raised to barrier owner (Inspection Engineer) for 44RV-771B — cert expiry 81 days overdue", sourceSystems: ["Barrier Register"], confidence: "High", user: "A. Bello", outcome: "Completed" },
   { id: "AU-013", timestamp: "06:20", module: "T4", actionType: "Classification", description: "STP leaderboard updated — Team C leads (878/1000), Team B drops to 4th following PTW dimension deduction", sourceSystems: ["STP Register"], confidence: "High", user: "System", outcome: "Completed" },
   { id: "AU-014", timestamp: "05:55", module: "T3", actionType: "Routing", description: "Offline-queued field entry (CW-101 strainer block) submitted — routed to §3, §12 on sync", sourceSystems: ["EoSR"], confidence: "High", user: "T. Okonkwo", outcome: "Completed" },
-  { id: "AU-015", timestamp: "05:40", module: "Ask IOSP", actionType: "Query", description: "Query: 'Show all jobs where PSF#1 compliance has not been confirmed' — returned ICC-2026-0418, High confidence", sourceSystems: ["Isolation Register", "PSF Standard rev 6"], confidence: "High", user: "S. Musa", outcome: "Completed" },
+  { id: "AU-015", timestamp: "05:40", module: "ProSafe Intelligence", actionType: "Query", description: "Query: 'Show all jobs where PSF#1 compliance has not been confirmed' — returned ICC-2026-0418, High confidence", sourceSystems: ["Isolation Register", "PSF Standard rev 6"], confidence: "High", user: "S. Musa", outcome: "Completed" },
   { id: "AU-016", timestamp: "00:00", module: "System", actionType: "Briefing", description: "Cycle 2026-16 mid-cycle report generated — day 9 of 14 snapshot committed to audit log", sourceSystems: ["STP Register", "EoSR", "Omnisafe", "SAP PM"], confidence: "High", user: "System", outcome: "Completed" },
 ];
 

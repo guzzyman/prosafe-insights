@@ -77,7 +77,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Prosafe IOSP Suite" },
       {
         name: "description",
-        content: "ISOP - Intelligent Operations & Safety Platform demo for LNG process safety.",
+        content: "Intelligent Operations & Safety Platform demo for LNG process safety.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

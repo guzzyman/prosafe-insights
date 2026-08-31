@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuditRouteImport } from './routes/audit'
+import { Route as IntelligenceRouteImport } from './routes/intelligence'
 import { Route as T1IndexRouteImport } from './routes/t1.index'
 import { Route as T1BriefingRouteImport } from './routes/t1.briefing'
 import { Route as T1Bt19RouteImport } from './routes/t1.bt19'
@@ -34,6 +35,11 @@ const IndexRoute = IndexRouteImport.update({
 const AuditRoute = AuditRouteImport.update({
   id: '/audit',
   path: '/audit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IntelligenceRoute = IntelligenceRouteImport.update({
+  id: '/intelligence',
+  path: '/intelligence',
   getParentRoute: () => rootRouteImport,
 } as any)
 const T1IndexRoute = T1IndexRouteImport.update({
@@ -110,6 +116,7 @@ const T4ReportRoute = T4ReportRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/audit': typeof AuditRoute
+  '/intelligence': typeof IntelligenceRoute
   '/t1/briefing': typeof T1BriefingRoute
   '/t1/bt19': typeof T1Bt19Route
   '/t1/owner': typeof T1OwnerRoute
@@ -128,6 +135,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/audit': typeof AuditRoute
+  '/intelligence': typeof IntelligenceRoute
   '/t1/briefing': typeof T1BriefingRoute
   '/t1/bt19': typeof T1Bt19Route
   '/t1/owner': typeof T1OwnerRoute
@@ -147,6 +155,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/audit': typeof AuditRoute
+  '/intelligence': typeof IntelligenceRoute
   '/t1/briefing': typeof T1BriefingRoute
   '/t1/bt19': typeof T1Bt19Route
   '/t1/owner': typeof T1OwnerRoute
@@ -167,6 +176,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/audit'
+    | '/intelligence'
     | '/t1/briefing'
     | '/t1/bt19'
     | '/t1/owner'
@@ -185,6 +195,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/audit'
+    | '/intelligence'
     | '/t1/briefing'
     | '/t1/bt19'
     | '/t1/owner'
@@ -203,6 +214,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/audit'
+    | '/intelligence'
     | '/t1/briefing'
     | '/t1/bt19'
     | '/t1/owner'
@@ -222,6 +234,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuditRoute: typeof AuditRoute
+  IntelligenceRoute: typeof IntelligenceRoute
   T1BriefingRoute: typeof T1BriefingRoute
   T1Bt19Route: typeof T1Bt19Route
   T1OwnerRoute: typeof T1OwnerRoute
@@ -252,6 +265,13 @@ declare module '@tanstack/react-router' {
       path: '/audit'
       fullPath: '/audit'
       preLoaderRoute: typeof AuditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/intelligence': {
+      id: '/intelligence'
+      path: '/intelligence'
+      fullPath: '/intelligence'
+      preLoaderRoute: typeof IntelligenceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/t1/': {
@@ -358,6 +378,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuditRoute: AuditRoute,
+  IntelligenceRoute: IntelligenceRoute,
   T1BriefingRoute: T1BriefingRoute,
   T1Bt19Route: T1Bt19Route,
   T1OwnerRoute: T1OwnerRoute,

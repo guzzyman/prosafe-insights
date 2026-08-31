@@ -21,8 +21,8 @@ const useDocumentTheme = () => {
 };
 
 // Toasts are fixed-position, so a top-aligned Toaster lands on top of the
-// sticky app header — over the Ask IOSP bar and the header controls. Clear it
-// by the height AppShell measures onto --app-header-h.
+// sticky app header — over the ProSafe Intelligence search bar and the header
+// controls. Clear it by the height AppShell measures onto --app-header-h.
 const clearHeader = { top: "calc(var(--app-header-h, 4rem) + 12px)" };
 
 const Toaster = ({ ...props }: ToasterProps) => {
